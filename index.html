@@ -139,7 +139,7 @@
 
   <!-- Image Container -->
   <div class="photo-container">
-    <img id="photo" src="images/default.jpg" alt="Gallery">
+    <img id="photo" src="images/default1.jpg" alt="Gallery">
     <button id="prev-btn" class="nav-btn left hidden">&#10094;</button>
     <button id="next-btn" class="nav-btn right hidden">&#10095;</button>
   </div>
@@ -150,11 +150,11 @@
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
-    let currentCategory = "default";
+    let currentCategory = "default1";
     let currentIndex = 0;
 
     const imageSets = {
-  default: ["images/default.jpg"],
+  default: ["images/default1.jpg"],
   ev: Array.from({ length: 2 }, (_, i) => `images/ev${i + 1}.jpg`),   // only 2 photos
   hybrid: Array.from({ length: 12 }, (_, i) => `images/hybrid${i + 1}.jpg`), // 12 photos
   diesel: Array.from({ length: 10 }, (_, i) => `images/diesel${i + 1}.jpg`), // 10 photos
@@ -195,14 +195,14 @@
     });
 
     prevBtn.addEventListener("click", () => {
-      if (currentCategory !== "default") {
+      if (currentCategory !== "default1") {
         currentIndex = (currentIndex - 1 + imageSets[currentCategory].length) % imageSets[currentCategory].length;
         showImage();
       }
     });
 
     nextBtn.addEventListener("click", () => {
-      if (currentCategory !== "default") {
+      if (currentCategory !== "default1") {
         currentIndex = (currentIndex + 1) % imageSets[currentCategory].length;
         showImage();
       }
@@ -212,4 +212,5 @@
   </script>
 </body>
 </html>
+
 
