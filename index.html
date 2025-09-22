@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DESIGN AND DEVELOPMENT OF A PREPARATORY AUTOMOTIVE HYBRID MECHANICAL SYSTEM FOR AUTOTRONICS COURSE OFFERING</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background: repeating-linear-gradient(
+        45deg,
+        #1c1c1c,
+        #1c1c1c 10px,
+        #111 10px,
+        #111 20px
+      ); /* carbon fiber look */
+      color: #f5f5f5;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(165, 0, 0, 0.9);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .menu button {
+      background: linear-gradient(145deg, #800000, #5a0000);
+      border: 2px solid #a50000;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      font-weight: bold;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .menu button:hover {
+      background: linear-gradient(145deg, #a50000, #800000);
+      box-shadow: 0 0 15px rgba(165, 0, 0, 1);
+      transform: scale(1.05);
+    }
+
+    #back-btn.back-small {
+      background: #e74c3c;
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border: 2px solid #ff6b6b;
+    }
+
+    #back-btn.back-small:hover {
+      background: #c0392b;
+      box-shadow: 0 0 12px rgba(231, 76, 60, 0.9);
+    }
+
+    /* Image container */
+    .photo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 65vh;
+      border-radius: 15px;
+      background: #000;
+      box-shadow: 0 0 20px rgba(165, 0, 0, 0.6), inset 0 0 15px rgba(255,255,255,0.1);
+      padding: 10px;
+      overflow: hidden;
+    }
+
+    .photo-container img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .photo-container img.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Navigation buttons */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(128, 0, 0, 0.9);
+      color: white;
+      border: 2px solid #a50000;
+      font-size: 1.5rem;
+      padding: 10px 14px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      background: #a50000;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 12px rgba(165, 0, 0, 1);
+    }
+
+    .nav-btn.left { left: 15px; }
+    .nav-btn.right { right: 15px; }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>DESIGN AND DEVELOPMENT OF A PREPARATORY AUTOMOTIVE HYBRID MECHANICAL SYSTEM FOR AUTOTRONICS COURSE OFFERING</h1>
+
+  <!-- Menu Buttons -->
+  <div class="menu">
+    <button id="ev-btn">EV</button>
+    <button id="hybrid-btn">Hybrid</button>
+    <button id="diesel-btn">Diesel</button>
+    <button id="wiring-btn">Wiring</button>
+    <button id="back-btn" class="back-small">Back</button>
+  </div>
+
+  <!-- Image Container -->
+  <div class="photo-container">
+    <img id="photo" src="images/default.jpg" alt="Gallery">
+    <button id="prev-btn" class="nav-btn left hidden">&#10094;</button>
+    <button id="next-btn" class="nav-btn right hidden">&#10095;</button>
+  </div>
+
+  <script>
+    const photo = document.getElementById("photo");
+    const backBtn = document.getElementById("back-btn");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    let currentCategory = "default";
+    let currentIndex = 0;
+
+    const imageSets = {
+  default: ["images/default.jpg"],
+  ev: Array.from({ length: 2 }, (_, i) => `images/ev${i + 1}.jpg`),   // only 2 photos
+  hybrid: Array.from({ length: 12 }, (_, i) => `images/hybrid${i + 1}.jpg`), // 12 photos
+  diesel: Array.from({ length: 10 }, (_, i) => `images/diesel${i + 1}.jpg`), // 10 photos
+  wiring: ["images/wiring1.JFIF"]  // only 1 photo
+};
+
+    function showImage() {
+      const set = imageSets[currentCategory];
+      photo.classList.remove("loaded");
+      setTimeout(() => {
+        photo.src = set[currentIndex];
+        photo.classList.add("loaded");
+      }, 100);
+      if (currentCategory === "default") {
+        prevBtn.classList.add("hidden");
+        nextBtn.classList.add("hidden");
+      } else {
+        prevBtn.classList.remove("hidden");
+        nextBtn.classList.remove("hidden");
+      }
+    }
+
+    document.getElementById("ev-btn").addEventListener("click", () => {
+      currentCategory = "ev"; currentIndex = 0; showImage();
+    });
+    document.getElementById("hybrid-btn").addEventListener("click", () => {
+      currentCategory = "hybrid"; currentIndex = 0; showImage();
+    });
+    document.getElementById("diesel-btn").addEventListener("click", () => {
+      currentCategory = "diesel"; currentIndex = 0; showImage();
+    });
+    document.getElementById("wiring-btn").addEventListener("click", () => {
+      currentCategory = "wiring"; currentIndex = 0; showImage();
+    });
+
+    backBtn.addEventListener("click", () => {
+      currentCategory = "default"; currentIndex = 0; showImage();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      if (currentCategory !== "default") {
+        currentIndex = (currentIndex - 1 + imageSets[currentCategory].length) % imageSets[currentCategory].length;
+        showImage();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentCategory !== "default") {
+        currentIndex = (currentIndex + 1) % imageSets[currentCategory].length;
+        showImage();
+      }
+    });
+
+    showImage();
+  </script>
+</body>
+</html>
