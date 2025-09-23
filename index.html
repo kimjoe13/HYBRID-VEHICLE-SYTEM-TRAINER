@@ -168,7 +168,7 @@
         photo.src = set[currentIndex];
         photo.classList.add("loaded");
       }, 100);
-      if (currentCategory === "default") {
+      if (currentCategory === "default1") {
         prevBtn.classList.add("hidden");
         nextBtn.classList.add("hidden");
       } else {
@@ -191,7 +191,7 @@
     });
 
     backBtn.addEventListener("click", () => {
-      currentCategory = "default"; currentIndex = 0; showImage();
+      currentCategory = "default1"; currentIndex = 0; showImage();
     });
 
     prevBtn.addEventListener("click", () => {
@@ -212,5 +212,6 @@
   </script>
 </body>
 </html>
+
 
 
