@@ -150,16 +150,16 @@
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
 
-    let currentCategory = "default1";
+    let currentCategory = "default1";  // using default1 now
     let currentIndex = 0;
 
     const imageSets = {
-  default1: ["images/default1.jpg"],
-  ev: Array.from({ length: 2 }, (_, i) => `images/ev${i + 1}.jpg`),   // only 2 photos
-  hybrid: Array.from({ length: 12 }, (_, i) => `images/hybrid${i + 1}.jpg`), // 12 photos
-  diesel: Array.from({ length: 10 }, (_, i) => `images/diesel${i + 1}.jpg`), // 10 photos
-  wiring: ["images/wiring1.jfif"]  // only 1 photo
-};
+      default1: ["images/default1.jpg"], // ✅ changed from "default" to "default1"
+      ev: Array.from({ length: 2 }, (_, i) => `images/ev${i + 1}.jpg`),
+      hybrid: Array.from({ length: 12 }, (_, i) => `images/hybrid${i + 1}.jpg`),
+      diesel: Array.from({ length: 10 }, (_, i) => `images/diesel${i + 1}.jpg`),
+      wiring: ["images/wiring1.jfif"]
+    };
 
     function showImage() {
       const set = imageSets[currentCategory];
@@ -191,7 +191,9 @@
     });
 
     backBtn.addEventListener("click", () => {
-      currentCategory = "default1"; currentIndex = 0; showImage();
+      currentCategory = "default1";  // ✅ stays consistent
+      currentIndex = 0;
+      showImage();
     });
 
     prevBtn.addEventListener("click", () => {
@@ -212,7 +214,4 @@
   </script>
 </body>
 </html>
-
-
-
 
